@@ -46,6 +46,18 @@ The ImpactJS folder must be at the root of this project. In other terms : **game
 ##### **4)** Make your game !
 The project is now configured and you can develop your game with ES6 !
 
+##### **5)** Build your game into a single file
+To build your games into a single file, use the shell and type this command into the root directory of your project
+```
+  npm run build
+```
+
+If your are in a development environnement, you can use :
+```
+  npm run build-dev
+```
+This command has a watcher and it will build your game when a file has changed.
+
 
 ## Examples
 
