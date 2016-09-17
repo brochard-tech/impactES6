@@ -1,0 +1,31 @@
+{
+  "name": "impactes6",
+  "version": "0.1.0",
+  "description": "This project allow you tu use ES6 with ImpactJS",
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/webpack -p --config webpack.config.js --progress --profile --colors",
+    "build-dev": "./node_modules/.bin/webpack -d --config webpack.config.js --watch --progress --profile --colors",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/myvertigo/impactES6.git"
+  },
+  "author": "Christophe Brochard <christophe.brochard@yahoo.fr> (http://www.myvertigo.fr)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/myvertigo/impactES6/issues"
+  },
+  "homepage": "https://github.com/myvertigo/impactES6#readme",
+  "dependencies": {
+    "clone": "^1.0.2",
+    "imports-loader": "^0.6.5",
+    "jquery": "^3.1.0"
+  },
+  "devDependencies": {
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.14.0",
+    "webpack": "^1.13.2"
+  }
+}
