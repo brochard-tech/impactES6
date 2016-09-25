@@ -1,10 +1,8 @@
 .idea/
-media/
-tools/
 node_modules/
 lib/impact
 lib/weltmeister
+example/lib/impact
+example/lib/weltmeister
 npm-debug.log
 weltmeister.html
-game.min.js
-game.min.js.map

@@ -1,17 +1,13 @@
-import Class from "lib/impactES6/Class";
-import CharacterFlight from "./../entities/CharacterFlight";
-import CharacterSpike from "./../entities/CharacterSpike";
+import CharacterFlight from "./../entities/characters/CharacterFlight";
+import CharacterSpike from "./../entities/characters/CharacterSpike";
 
 ig.require('impact.game');
 
 
-export default class Arena extends Class.inheritance(ig.Game) {
+export default class Arena extends ig.Game {
     /* LIFECYCLE */
     init ()
     {
-        this.gravity    = 300;
-        this.player     = null;
-
         // Bind inputs for player
         ig.input.bind(ig.KEY.UP_ARROW, 'up');
         ig.input.bind(ig.KEY.RIGHT_ARROW, 'right');
@@ -20,7 +16,8 @@ export default class Arena extends Class.inheritance(ig.Game) {
         ig.input.bind(ig.KEY.SPACE, 'fire');
 
         this.player = ig.game.spawnEntity(CharacterFlight, 0, 0);
-        this.spike  = ig.game.spawnEntity(CharacterSpike, 50, Arena.getHeight() - 100);
+        this.spike  = ig.game.spawnEntity(CharacterSpike, 50, ig.system.height - 100);
+        ig.game.spawnEntity(CharacterSpike, 200, ig.system.height - 100, { size: {x: 70, y: 70} });
     }
 
     update ()
@@ -30,6 +27,16 @@ export default class Arena extends Class.inheritance(ig.Game) {
         if (this.player) {
             this.updateInputs();
         }
+    }
+
+    draw ()
+    {
+        super.draw();
+
+        var x = ig.system.width / 2,
+            y = ig.system.height / 2;
+
+        this.font.draw('It Works!', x, y, ig.Font.ALIGN.CENTER);
     }
 
 
@@ -48,20 +55,16 @@ export default class Arena extends Class.inheritance(ig.Game) {
         if (down) { y++; }
         if (up) { y--; }
 
-        this.player.setAccel(x, y);
+        this.player.setVel(x, y);
 
         if (ig.input.pressed('fire')) {
             this.player.fire();
         }
     }
-
-    static getWidth ()
-    {
-        return ig.system.scale * ig.system.width;
-    }
-
-    static getHeight ()
-    {
-        return ig.system.scale * ig.system.height;
-    }
 }
+
+ig.bindProperties(Arena, {
+    gravity : 300,
+    player  : null,
+    font    : new ig.Font('media/04b03.font.png')
+});

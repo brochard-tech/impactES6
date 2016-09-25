@@ -1,6 +1,6 @@
 {
   "name": "impactes6",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "This project allow you tu use ES6 with ImpactJS",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/myvertigo/impactES6#readme",
   "dependencies": {
-    "clone": "^1.0.2",
     "imports-loader": "^0.6.5",
     "jquery": "^3.1.0"
   },

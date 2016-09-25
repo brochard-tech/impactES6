@@ -1,21 +1,8 @@
-import Class from "lib/impactES6/Class";
-
 ig.require('impact.entity');
 
 
-export default class Character extends Class.inheritance(ig.Entity) {
+export default class Character extends ig.Entity {
     /* LIFECYCLE */
-    init (x, y, settings)
-    {
-        super.init(x, y, settings);
-
-        this.zIndex         = 0;
-        this.speed          = 100;
-        this.health         = 100;
-        this.timeWeaponWait = 200;
-        this.gravityFactor  = 0;
-    }
-
     update ()
     {
         super.update();
@@ -27,7 +14,7 @@ export default class Character extends Class.inheritance(ig.Entity) {
 
     check ()
     {
-        //this.kill();
+        this.kill();
     }
 
 
@@ -79,3 +66,11 @@ export default class Character extends Class.inheritance(ig.Entity) {
         return false;
     }
 }
+
+ig.bindProperties(Character, {
+    zIndex          : 0,
+    speed           : 100,
+    health          : 200,
+    timeWeaponWait  : 200,
+    gravityFactor   : 0
+});
