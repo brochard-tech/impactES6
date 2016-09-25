@@ -1,9 +1,12 @@
 # impactES6
 
-**Version BETA 0.1**
+### NEW UPDATE : **Version BETA 0.3**
+
+#### What's new in 0.3 Version
+- Is it now possible to have a project with both old script and ES6 Scripts. Note : To avoid most common error, please read the chapter about "Use Strict mode"
+- Preloading image run now correctly
 
 This project allow you tu use ES6 with ImpactJS.
-
 
 > **Note about current version**
 
@@ -30,8 +33,21 @@ This project use webpack to minify and uglify your all game into a single file. 
 Npm ("Module Package Manager") is a tool for manage your project dependency. To have Npm in your shell, you must install **Node**
 [by clicking here][3]
 
+#### Use strict mode
 
-## Installation and usage
+In ES6, all scripts are in *use strict* mode. In this mode, you **can't** create a global variable :
+```javascript
+  EntityPlayer = ig.Entity.extend(...) // Will throw an error because EntityPlayer doesn't exist
+```
+To avoid this error, you **must** bind your entity with "ig" variable like this :
+```javascript
+  ig.EntityPlayer = ig.Entity.extend(...) // GOOD !
+```
+In fact, in *use strict* mode, a function that is not an object can't have a reference to a *this* and it doesn't not also
+reference to *window* object.
+
+
+## Installation
 
 ##### **1)** Copy this project into your local environment.
 
@@ -59,14 +75,81 @@ If your are in a development environnement, you can use :
 This command has a watcher and it will build your game when a file has changed.
 
 
+## Usage
+
+### Import an old script
+```javascript
+ig.require('game.entities.fire');   // You need to require it juste once. It will be loaded for all your project
+```
+
+### Import a new script
+```javascript
+import EntityPlayer from "lib/game/entities/player";
+```
+
+### Create an entity
+```javascript
+export default class EntityPlayer extend ig.Entity {
+
+    init (x, y, settings) 
+    {
+        super.init(x, y, settings);
+        ...
+    }
+    
+    fire ()
+    {
+        ig.game.spawnEntity(EntityFire, this.pos.x + (this.size.x / 2), this.pos.y + this.size.y, { owner: this });
+    }
+    
+}
+```
+
+### Default properties
+Default properties is a new way to declare your properties **before** the new object was created.
+For example, in ES5 Script, you have :
+```javascript
+    ig.EntityPlayer = ig.Entity.extend({
+        animSheet: new ig.AnimationSheet('media/player.png', 10, 10),
+        size    : {x: 10, y: 10},
+        speed: 300,
+        
+        init: function (x, y, settings) {
+            ...
+        }
+    });
+```
+
+In ES6, you can't define variable except into a function, so, when it is created. But ImpactES6 has a function which
+allow you to define properties. Like this :
+```javascript
+export default class EntityPlayer extend ig.Entity {
+    init (x, y, settings) 
+    {
+        ...
+    }
+}
+
+ig.bindProperties(EntityPlayer, {
+    animSheet   : new ig.AnimationSheet('media/player.png', 10, 10),
+    size        : {x: 10, y: 10},
+    speed       : 300
+});
+```
+
+### jQuery
+jQuery is added by default on the project. You can call "$" or "jQuery" without do anything. But if you want to add
+plugin into jQuery, you have to use *imports-loader* and import your plugin like this :
+```javascript
+import "imports?$=jquery,this=>window!velocity-animate";
+```
+It is a query string which means that you import global jQuery into the script and you define the window object like global variable.
+Like *ig.require*, import it once and it will be loaded into all your project.
+
+
 ## Examples
 
-You can see a dummy example into the ./example folder.
-
-### How to run the example
-
- - Go to **index.js** on the root. Uncomment the last line with the require instruction.
- - Don't forget to comment the line above, the one with an other require instruction.
+You can see a dummy example into the folder, juste load the index.html in your browser and you will see.
  
  
 

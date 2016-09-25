@@ -2,14 +2,16 @@ var path    = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-
     // Entry file JS
-    entry: './index.js',
+    entry: {
+        game        : './index.js',
+        example     : './example.js'
+    },
 
     // File minified
     output: {
-        path: __dirname,
-        filename: 'game.min.js'
+        path: path.join(__dirname, 'dist'),
+        filename: '[name].min.js'
     },
 
     // Set shorcut to js files
@@ -34,6 +36,12 @@ module.exports = {
     module: {
         // Babel ES6 Loader
         loaders: [
+            {
+                test: /\.js$/,
+                loader: 'imports?this=>window',
+                exclude: '/node_modules/'
+            },
+
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
