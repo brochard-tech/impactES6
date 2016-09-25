@@ -11,7 +11,6 @@ This project allow you tu use ES6 with ImpactJS.
 > **Note about current version**
 
 > - Impact Library support : **Version 1.24**
-> - It is currently not possible to have ES5 impact module and ES6 class. I recommand you to use this project for a new game only.
 > - If you encouter any bugs or issues, please report it into the issues page
 
 
